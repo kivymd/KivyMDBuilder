@@ -31,8 +31,8 @@ If you need help or have a question, you can ask for help on our mailing list:
 
 You can find out at what stage of development the project is in our official profiles:
 
-**Youtube:** https://www.youtube.com/c/KivyMD
-**Twitter:** https://twitter.com/KivyMD
+- **Youtube:** https://www.youtube.com/c/KivyMD
+- **Twitter:** https://twitter.com/KivyMD
 
 ## Preview
 
