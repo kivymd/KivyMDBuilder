@@ -8,7 +8,9 @@ The project is currently under active development and the release date is not kn
 Drag and drop components, and turn designs into real application screens in minutes instead of hours.
 Take advantage of the various widgets and their properties to build elaborate and beautiful apps.
 
-<img width="720" src="https://github.com/kivymd/storage/raw/main/kivymdbuilder/images/preview-1.png">
+<p align="center">
+    <img width="720" src="https://github.com/kivymd/storage/raw/main/kivymdbuilder/images/preview-1.png">
+</p>
 
 
 ## Connect Your Designs to Firebase
@@ -16,8 +18,9 @@ Take advantage of the various widgets and their properties to build elaborate an
 Easily implement dynamic data in your designs, quickly hook up `Firebase`
 and then select where those calls are made within your design.
 
-<img width="720" src="https://github.com/kivymd/storage/raw/main/kivymdbuilder/images/preview-2.png">
-
+<p align="center">
+    <img width="720" src="https://github.com/kivymd/storage/raw/main/kivymdbuilder/images/preview-2.png">
+</p>
 
 ## Support
 
@@ -47,7 +50,7 @@ You can find out at what stage of development the project is in our official pro
 
 Material Design widgets for [Kivy](http://kivy.org) framework.
 
-https://github.com/kivymd-extensions
+https://github.com/kivymd/KivyMD
 
 <img align="left" width="128" src="https://github.com/kivymd/internal/raw/main/logo/kivymd_extensions.png"/>
 
