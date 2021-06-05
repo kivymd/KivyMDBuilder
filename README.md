@@ -3,6 +3,13 @@
 Is an open source project developed by the KivyMD team.
 The project is currently under active development and the release date is not known.
 
+[![Code style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Discord](https://img.shields.io/discord/566880874789076992?logo=discord)](https://discord.gg/wu3qBST)
+[![Twitter](https://img.shields.io/twitter/follow/KivyMD?label=follow&logo=twitter&style=flat&color=brightgreen)](https://twitter.com/KivyMD)
+[![YouTube](https://img.shields.io/static/v1?label=subscribe&logo=youtube&logoColor=ff0000&color=brightgreen&message=2.7k)](https://www.youtube.com/c/KivyMD)
+[![Open Collective](https://img.shields.io/opencollective/all/kivymd?label=financial%20contributors&logo=open-collective)](https://opencollective.com/kivymd)
+[![Repository size](https://img.shields.io/github/repo-size/kivymd/kivymdbuilder.svg)](https://github.com/kivymd/KivyMDBuilder)
+
 ## Build Apps Visually
 
 Drag and drop components, and turn designs into real application screens in minutes instead of hours.
