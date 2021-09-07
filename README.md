@@ -69,7 +69,7 @@ https://github.com/kivymd-extensions
 
 ## Contributing
 
-If you would like to contribute to the development of this project, read [this](https://github.com/kivymd/KivyMD/blob/main/CONTRIBUTING.md) document.
+If you would like to contribute to the development of this project, read [this](https://github.com/kivymd/KivyMDBuilder/blob/main/CONTRIBUTING.md) document.
 
 ## License
 
