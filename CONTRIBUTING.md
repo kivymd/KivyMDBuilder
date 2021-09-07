@@ -12,6 +12,11 @@ of this project:
 - The project is modular. No part of the project depends on its components
 - You don't need to care about the user interface (this is the task of core developer of this project)
 
+> :warning:
+>     You don't have to do any manipulation of the user interface either.
+>     
+>     Your modules should only return a value.
+
 ## How can I help?
 
 At the moment, there are a number of tasks that need to be addressed:
@@ -54,3 +59,9 @@ At the moment, there are a number of tasks that need to be addressed:
 This list is far from complete. If possible, I will supplement every day.
 For questions related to the above list, you can contact the [KivyMD](https://discord.gg/n8GpdeP6UH) server in
 the [KivyMDBuilder (dev)](https://discord.gg/xWw3NBBntQ) section.
+
+##  Code style
+
+- Each method of your modules should contain dos strings describing how this method works
+- Each parameter of your methods must contain the typ hinting of the arguments
+- The code must be formatted with the [Black](https://github.com/psf/black) utility
