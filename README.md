@@ -67,6 +67,10 @@ Additional extensions for the KivyMD library.
 
 https://github.com/kivymd-extensions
 
+## Contributing
+
+If you would like to contribute to the development of this project, read [this](https://github.com/kivymd/KivyMD/blob/main/CONTRIBUTING.md) document.
+
 ## License
 
 `KivyMD Builder` is released under the terms of the [MIT License](https://github.com/kivymd/KivyMDBuilder/blob/master/LICENSE), same as [Kivy](https://github.com/kivy/kivy/blob/master/LICENSE).
