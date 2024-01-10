@@ -1,7 +1,7 @@
 # KivyMD Builder
 
-Is an open source project developed by the KivyMD team.
-The project is currently under active development and the release date is not known.
+This is a non-open source project developed by the KivyMD team.
+The project is currently under active development and the release date is unknown.
 
 [![Code style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Discord](https://img.shields.io/discord/566880874789076992?logo=discord)](https://discord.gg/wu3qBST)
