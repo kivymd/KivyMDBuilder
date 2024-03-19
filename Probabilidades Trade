@@ -1,0 +1,152 @@
+import gspread
+from google.oauth2.service_account import Credentials
+from kivy.app import App
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.button import Button
+from kivy.uix.label import Label
+from kivy.uix.scrollview import ScrollView
+from kivy.uix.boxlayout import BoxLayout
+from kivy.clock import Clock
+from kivy.uix.popup import Popup
+from kivy.uix.image import Image
+from kivy.utils import platform
+from kivmob import KivMob
+
+class SportsApp(App):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.categories = ['Futebol', 'Basquete', 'Vôlei', 'Hóquei', 'Futsal', 'MMA']
+        self.sheet = self.setup_google_sheet()
+        self.admob = None
+
+    def setup_google_sheet(self):
+        # Configuração das credenciais do Google Sheets
+        scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+        creds = Credentials.from_service_account_file('C:/Users/wellc/Desktop/python/Nova pasta/Nova pasta/planar-flux-417601-21aec49f1e55.json', scopes=scope)
+        client = gspread.authorize(creds)
+        # Abrir a planilha
+        return client.open('Servidor')
+
+    def build(self):
+        self.layout = GridLayout(cols=1)
+        self.show_intro_screen()
+        return self.layout
+
+    def show_intro_screen(self):
+        intro_layout = GridLayout(cols=1)
+        intro_image = Image(source='C:/Users/wellc/Desktop/python/Nova pasta/Nova pasta/tela.png')
+        intro_layout.add_widget(intro_image)
+        self.layout.add_widget(intro_layout)
+        Clock.schedule_once(self.show_category_screen, 5)  # Mostrar a tela de categorias após 5 segundos
+
+    def show_category_screen(self, dt):
+        self.layout.clear_widgets()
+        self.add_category_buttons_with_count()
+
+    def add_category_buttons_with_count(self):
+        for category in self.categories:
+            num_games = len(self.get_games_and_tips(category))
+            button_text = f"{category} ({num_games} jogos)"
+            button = Button(text=button_text, font_size='50sp', background_color=self.get_category_color(category))
+            button.bind(on_press=lambda instance, category=category: self.on_category_selected(category))
+            self.layout.add_widget(button)
+
+    def on_category_selected(self, category):
+        self.layout.clear_widgets()
+        category_label = Label(text=category, font_size='80sp', size_hint=(1, None), height=100,
+                               valign='middle', halign='center')
+        self.layout.add_widget(category_label)
+        games_and_tips = self.get_games_and_tips(category)
+        self.add_games(games_and_tips)
+        self.show_advertisement()
+
+    def get_games_and_tips(self, category):
+        try:
+            # Acessar a aba correspondente à categoria
+            sheet = self.sheet.worksheet(category.lower())
+            
+            # Recupera os valores de todas as células na coluna C e na coluna E
+            games = sheet.col_values(3)[1:]  # Coluna C, começando da segunda linha
+            tips = sheet.col_values(5)[1:]   # Coluna E, começando da segunda linha
+            
+            # Combina os jogos e as dicas em uma lista de tuplas
+            games_and_tips = list(zip(games, tips))
+            
+            # Remove as entradas em branco (caso haja)
+            games_and_tips = [(game, tip) for game, tip in games_and_tips if game.strip() and tip.strip()]
+            
+            return games_and_tips
+        except gspread.exceptions.WorksheetNotFound:
+            return []
+
+    def add_games(self, games_and_tips):
+        scroll_view = ScrollView()
+        games_layout = GridLayout(cols=1, size_hint_y=None)
+        games_layout.bind(minimum_height=games_layout.setter('height'))
+
+        for game, tip in games_and_tips:
+            game_button = Button(text=game, size_hint_y=None, height=80)
+            game_button.bind(on_press=lambda instance, game=game, tip=tip: self.on_game_selected(game, tip))
+            games_layout.add_widget(game_button)
+
+        scroll_view.add_widget(games_layout)
+        self.layout.add_widget(scroll_view)
+        home_button = Button(text="Home", size_hint_y=None, height=80)
+        home_button.bind(on_press=self.on_home_button_pressed)
+        self.layout.add_widget(home_button)
+
+    def on_game_selected(self, game, tip):
+        self.layout.clear_widgets()
+        team_label = Label(text=game, font_size='30sp', size_hint_y=None, height=200, valign='middle',
+                           halign='center')
+        self.layout.add_widget(team_label)
+        tips_label = Label(text=tip, font_size='30sp', size_hint_y=None, height=320, valign='middle',
+                           halign='center')
+        self.layout.add_widget(tips_label)
+        home_button = Button(text="Home", size_hint_y=None, height=80)
+        home_button.bind(on_press=self.on_home_button_pressed)
+        self.layout.add_widget(home_button)
+
+    def on_home_button_pressed(self, instance):
+        self.layout.clear_widgets()
+        self.add_category_buttons_with_count()
+
+    def get_category_color(self, category):
+        if category == 'Futebol':
+            return 0, 1, 0, 1  # Verde
+        elif category == 'Basquete':
+            return 0, 0, 1, 1  # Azul
+        elif category == 'Vôlei':
+            return 1, 1, 0, 1  # Amarelo
+        elif category == 'Hóquei':
+            return 1, 1, 1, 1  # Branco
+        elif category == 'Futsal':
+            return 0.588, 0.294, 0, 1  # Marrom
+        elif category == 'MMA':
+            return 1, 0, 0, 1  # Vermelho
+
+    def show_advertisement(self):
+        if platform == 'android':
+            self.admob = KivMob('ca-app-pub-5591128266531564~1002392147')  # ID do editor
+            self.admob.new_banner('cca-app-pub-5591128266531564/4690764830', top_pos=True)  # ID de bloco de anúncios de teste
+            self.admob.request_banner()
+            self.admob.show_banner()
+        else:
+            # Caso não esteja em uma plataforma Android, exibe uma mensagem de aviso
+            content = Label(text="Anúncios apenas em dispositivos Android.")
+            popup_content = BoxLayout(orientation='vertical')
+            popup_content.add_widget(content)
+            popup = Popup(title="Aviso", content=popup_content, size_hint=(None, None), size=(400, 200), auto_dismiss=True)
+            popup.open()  # Abre o pop-up
+
+    def on_pause(self):
+        if self.admob:
+            self.admob.pause()
+        return True
+
+    def on_resume(self):
+        if self.admob:
+            self.admob.resume()
+
+if __name__ == '__main__':
+    SportsApp().run()
